@@ -1,107 +1,287 @@
 @extends('layouts.app')
 
 @section('content')
-	<br></br>		
-	<br></br>
-	<div class="row justify-content-md-center">
-	<div class="col-md-8 text-center">
-	
-		<div class="card">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:w…t@400;600;700&family=Nunito:wght@300;400;600&display=swap');
 
-			<h5 class="card-header info-color white-text text-center py-4">
-				<strong>Đăng Ký Tài Khoản</strong>
-			</h5>
+.register-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f0e8 0%, #fdf6ec 50%, #f0e8d8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 15px;
+    font-family: 'Nunito', sans-serif;
+}
 
-			<!--Card content-->
-			<div class="card-body px-lg-5 pt-0">
+.register-card {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,104,139,0.12), 0 4px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+    width: 100%;
+    max-width: 580px;
+}
 
-				<!-- Form -->
-				<form class="text-center" style="color: #757575;" action="{{ url('/dangky/dienthongtin') }}" method="post" enctype="multipart/form-data">
-						{{ csrf_field() }}
-					<div class="form-row">
-						<div class="col">
-							<!-- First name -->
-							<div class="md-form">
-								<input type="text" id="materialRegisterFormFirstName" class="form-control" name="hoten" required>
-								<label for="materialRegisterFormFirstName"style="padding-bottom:5px">Nhập Họ Và Tên</label>
-							</div>
-						</div>
-						<div class="col">
-							<!-- Last name -->
-							<div class="md-form">
-								<input type="text" id="materialRegisterFormLastName" class="form-control" name="tendangnhap" required>
-								<label for="materialRegisterFormLastName"style="padding-bottom:5px">Tên Đăng Nhập</label>
-								@if(isset($dn))
-									<p class="text-danger" style="float:left">Tên đăng nhập đã tồn tại</p>	
-								@endif
-							</div>
-						</div>
-					</div>
+.register-header {
+    background: linear-gradient(135deg, #00688B 0%, #005a78 100%);
+    padding: 40px 40px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
 
-					<!-- E-mail -->
-					<div class="md-form mt-0">
-						<input type="email" id="materialRegisterFormEmail" class="form-control" name="email" required>
-						<label for="materialRegisterFormEmail"style="padding-bottom:5px">E-mail</label>
-						@if(isset($gm))
-						  <p class="text-danger" style="float:left">Email đã tồn tại</p>	
-						@endif
-					</div>
+.register-header::before {
+    content: '🎂';
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.08;
+    right: -10px;
+    top: -10px;
+}
 
-					<!-- Password -->
-					
-					<div class="form-row">
-						<div class="col">
-							<!-- mk-->
-							<div class="md-form">
-								<input type="password" name="matkhau" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"required>
-								<label for="materialRegisterFormPassword"style="padding-bottom:5px">Mật Khẩu</label>
-							</div>
-						</div>
-						<div class="col">
-							<!-- xác nhận MK -->	
-							<div class="md-form">
-								<input type="password" name="nhaplaimatkhau" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" required>
-								<label for="materialRegisterFormPassword"style="padding-bottom:5px">Nhập Lại Mật Khẩu</label>
-								@if(isset($mk))
-								  <p class="text-danger" style="float:left">Mật khẩu không khớp</p>
-								@endif
-							</div>
-						</div>
-					</div>
+.register-header::after {
+    content: '🍰';
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.08;
+    left: -5px;
+    bottom: -10px;
+}
 
-					<!-- Phone number -->
-					<div class="md-form">
-						<input type="number"name="sdt" id="materialRegisterFormPhone" class="form-control" aria-describedby="materialRegisterFormPhoneHelpBlock"required>
-						<label for="materialRegisterFormPhone" style="padding-bottom:5px">Số Điện Thoại</label>
-						@if(isset($sdt))
-							<p class="text-danger" style="float:left">Số điện thoại đã tồn tại</p>
-						@endif
-					</div>
+.register-header h3 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
 
-					<!-- Sign up button -->
-					<button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Đăng Ký</button>
+.register-header p {
+    color: rgba(255,255,255,0.75);
+    margin: 8px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+}
 
-					<!-- Social register -->
-					
+.register-body {
+    padding: 35px 40px 40px;
+}
 
-					<hr>
+.form-group-custom {
+    margin-bottom: 20px;
+    position: relative;
+}
 
-					<!-- Terms of service -->
-					<p>Bằng cách nhấp vào
-						<em>"Đăng Ký"</em> bạn đồng ý với các
-						<a href="" target="_blank">điều khoản và dịch vụ</a>
+.form-group-custom label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 7px;
+    letter-spacing: 0.3px;
+}
 
-				</form>
-				<!-- Form -->
+.form-group-custom label i {
+    color: #00688B;
+    margin-right: 6px;
+    width: 14px;
+}
 
-			</div>
+.form-group-custom .form-control {
+    border: 1.5px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 11px 15px;
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    color: #333;
+    transition: all 0.2s;
+    background: #fafafa;
+    width: 100%;
+}
 
-		</div>
-	
-	</div>
-	</div>
-	
-	<br></br>
+.form-group-custom .form-control:focus {
+    border-color: #00688B;
+    box-shadow: 0 0 0 3px rgba(0,104,139,0.1);
+    background: white;
+    outline: none;
+}
 
+.form-row-custom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.error-text {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-register {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #00688B 0%, #005a78 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(0,104,139,0.35);
+}
+
+.btn-register:active {
+    transform: translateY(0);
+}
+
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 1px;
+    background: #eee;
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.terms-text {
+    text-align: center;
+    font-size: 12.5px;
+    color: #999;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+.terms-text a {
+    color: #00688B;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.terms-text a:hover {
+    text-decoration: underline;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+.login-link a {
+    color: #00688B;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .register-body { padding: 25px 20px 30px; }
+    .register-header { padding: 30px 20px 25px; }
+    .form-row-custom { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="register-wrapper">
+    <div class="register-card">
+        <div class="register-header">
+            <h3>Tạo Tài Khoản</h3>
+            <p>Tham gia EAUTCAKE để nhận ưu đãi đặc biệt 🎁</p>
+        </div>
+
+        <div class="register-body">
+            <form action="{{ url('/dangky/dienthongtin') }}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+
+                <div class="form-row-custom">
+                    <div class="form-group-custom">
+                        <label><i class="fa fa-user"></i>Họ và Tên</label>
+                        <input type="text" class="form-control" name="hoten" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="form-group-custom">
+                        <label><i class="fa fa-id-card"></i>Tên Đăng Nhập</label>
+                        <input type="text" class="form-control" name="tendangnhap" placeholder="username" required>
+                        @if(isset($dn))
+                            <div class="error-text">⚠ Tên đăng nhập đã tồn tại</div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group-custom">
+                    <label><i class="fa fa-envelope"></i>Địa Chỉ Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="example@email.com" required>
+                    @if(isset($gm))
+                        <div class="error-text">⚠ Email này đã được sử dụng</div>
+                    @endif
+                </div>
+
+                <div class="form-row-custom">
+                    <div class="form-group-custom">
+<label><i class="fa fa-lock"></i>Mật Khẩu</label>
+                        <input type="password" class="form-control" name="matkhau" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group-custom">
+                        <label><i class="fa fa-lock"></i>Xác Nhận Mật Khẩu</label>
+                        <input type="password" class="form-control" name="nhaplaimatkhau" placeholder="••••••••" required>
+                        @if(isset($mk))
+                            <div class="error-text">⚠ Mật khẩu không khớp</div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group-custom">
+                    <label><i class="fa fa-phone"></i>Số Điện Thoại</label>
+                    <input type="number" class="form-control" name="sdt" placeholder="0xxxxxxxxx" required>
+                    @if(isset($sdt))
+                        <div class="error-text">⚠ Số điện thoại đã tồn tại</div>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn-register">
+                    Đăng Ký Ngay
+                </button>
+
+                <p class="terms-text">
+                    Bằng cách nhấp "Đăng Ký" bạn đồng ý với
+                    <a href="#">điều khoản và dịch vụ</a> của chúng tôi
+                </p>
+
+                <div class="divider">hoặc</div>
+
+                <p class="login-link">
+                    Đã có tài khoản? <a href="{{ url('/dangnhap') }}">Đăng nhập ngay</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
-	
