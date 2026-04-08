@@ -638,19 +638,19 @@
 	@endif
 	@php $dem++; @endphp
 	@endforeach
-	
+
+  </div>{{-- END carousel-inner --}}
 
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="" aria-hidden="true"><h2 class="icon-chevron-sign-left" style="color:#00688B"></h2></span>
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
   <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-     <span class="" aria-hidden="true"><h2 class="icon-chevron-sign-right" style="color:#00688B"></h2></span>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-  
-</div>
-</div>
+
+</div>{{-- END carousel --}}
 <div class="row justify-content-md-center bg-white">
         <!-- Title -->
         <div class="col-sm-12 mt-3">
@@ -722,8 +722,52 @@
   width:100%;
   position:absolute;
 }
+
+/* Fix carousel */
+#carouselExampleControls { position: relative; }
+.carousel-control-prev, .carousel-control-next {
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(0,104,139,0.7) !important;
+    border-radius: 50% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    opacity: 1 !important;
+}
+.carousel-control-prev { left: 10px !important; }
+.carousel-control-next { right: 10px !important; }
+
+/* Fix pagination */
+.pagination {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    list-style: none;
+    padding: 15px 0 !important;
+    margin: 0 !important;
+    gap: 4px;
+}
+.pagination li { display: inline-block !important; }
+.pagination li a, .pagination li span {
+    display: inline-block;
+    padding: 6px 14px !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 6px !important;
+    color: #00688B !important;
+    text-decoration: none;
+    font-size: 14px;
+}
+.pagination li.active span {
+    background: #00688B !important;
+    color: white !important;
+    border-color: #00688B !important;
+}
+
+/* Fix promo images */
+.promo-box img { width: 100% !important; height: 170px !important; object-fit: cover; }
+.card-img-top { object-fit: cover; }
 </style>
-
-
 
 @endsection
