@@ -162,8 +162,6 @@
 			
 				@endforeach
 				</div>
-					
-				<div class="row mt-2 justify-content-md-center" >{{$banh->links()}}</div>
 		</div>
 		<div class="tab-pane fade" id="BanhBC-just" role="tabpanel" aria-labelledby="profile-tab-just">
 			 <div class="row" id="sanpham" style="background:#f9fffd">
