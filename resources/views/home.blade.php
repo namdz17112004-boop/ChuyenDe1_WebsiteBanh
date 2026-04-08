@@ -20,7 +20,7 @@
                   <li class="animate-in">
                       <div class="flat-caption caption1 formLeft delay300 text-center"><span class="suphead">Top Bánh Ngon</span></div>
                       <div class="flat-caption caption2 formLeft delay400 text-center">
-                          <h1>Chỉ có tại MINICAKE</h1>
+                          <h1>Chỉ có tại EAUTCAKE</h1>
                       </div>
                       <div class="flat-caption caption3 formLeft delay500 text-center">
                           <p>Món Bánh Truyền Thống</br>Thơm ngon bổ rẻ</p>
@@ -31,7 +31,7 @@
 					<!-- hình 2-->
                   <li>
                       <div class="flat-caption caption2 formLeft delay400">
-                          <h1>Hãy đến với MINICAKE</h1>
+                          <h1>Hãy đến với EAUTCAKE</h1>
                       </div>
                       <div class="flat-caption caption3 formLeft delay500">
                           <h2>Bạn sẽ được trải nghiệm các loại bánh mới nhất<br>nHưng giá cực kỳ hấp dẫn.</h2>
@@ -42,10 +42,10 @@
 					<!-- hình 3-->
                   <li>
                       <div class="flat-caption caption2 formLeft delay400 text-center">
-                          <h1>Các loại bánh mới nhất 2018</h1>
+                          <h1>Các loại bánh mới nhất 2026</h1>
                       </div>
                       <div class="flat-caption caption3 formLeft delay500 text-center">
-                          <p>Chỉ có tại MINICAKE. <br>Bạn còn chờ gì nữa</p>
+                          <p>Chỉ có tại EAUTCAKE. <br>Bạn còn chờ gì nữa</p>
                       </div>
                       <div class="flat-button caption4 formLeft delay600 text-center"><a class="more" href="{{ url('/dangky') }}">Đăng Ký Để Nhận Ưu Đãi</a></div>
                       <div class="flat-image formBottom delay200" data-bottom="true"><img style="height:400px;width:400px" src="{{ asset('images/img/macaron.png') }}" alt=""></div>
