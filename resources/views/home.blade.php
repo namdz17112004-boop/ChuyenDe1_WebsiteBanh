@@ -491,21 +491,21 @@
 						<i class="fa fa-map-marker"></i>
 					  </a>
 					  <p>Việt Nam</p>
-					  <p class="mb-md-0">Long Xuyên, An Giang </p>
+					  <p class="mb-md-0">Nguyên Xá, Hà Nội </p>
 					</div>
 					<div class="col-md-4">
 					  <a class="btn-floating blue accent-1">
 						<i class="fa fa-phone"></i>
 					  </a>
-					  <p>+84 35 228 3633</p>
+					  <p>+84 967041245</p>
 					  <p class="mb-md-0">Mon - Fri, 8:00-22:00</p>
 					</div>
 					<div class="col-md-4">
 					  <a class="btn-floating blue accent-1">
 						<i class="fa fa-envelope"></i>
 					  </a>
-					  <p>minicake.com</p>
-					  <p class="mb-0">letrongky0110@gmail.com</p>
+					  <p>eautcake.com</p>
+					  <p class="mb-0">donam17112004@gmail.com</p>
 					</div>
 				  </div>
 
