@@ -84,7 +84,6 @@ Route::get("dathang/duyetdonhang/{id}", 'dathangController@duyetdonhang')->middl
 Route::get("dathang/xemchitietdonhang/{id}", 'dathangController@xemchitietdonhang')->middleware('nhanvien');
 Route::get("dathang/indonhang/{id}", 'dathangController@indonhang')->middleware('nhanvien');
 //hoadon
-Route::get("hoadon/xemhoadon", 'hoadonController@xemhoadon')->middleware('nhanvien');
 Route::get("hoadon/xemchitiethoadon/{id}", 'hoadonController@xemchitiethoadon')->middleware('nhanvien');
 Route::get("hoadon/inhoadon/{id}", 'hoadonController@inhoadon')->middleware('nhanvien');
 
