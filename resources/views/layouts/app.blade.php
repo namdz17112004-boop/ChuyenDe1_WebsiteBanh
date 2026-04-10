@@ -149,10 +149,8 @@ footer {
                           </div>
                       </li>
 					  @endif
-					   <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i>Đơn Hàng<i class="fa fa-angle-down rotate-icon"></i></a>
                           <div class="collapsible-body">
                               <ul>
-                                    <li><a href="{{ url('/hoadon/xemhoadon') }}">Hóa đơn</a></li>
 									<li><a href="{{ url('/dathang/xemdonhang') }}">Đơn đặt hàng</a></li>
                               </ul>
                           </div>
