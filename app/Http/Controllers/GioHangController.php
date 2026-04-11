@@ -11,13 +11,15 @@ class GioHangController extends Controller
     public function themgiohang($id)
     {
 		$Banh=DB::table('tbl_banh')->join('tbl_loaibanh','tbl_banh.MaLoai','=','tbl_loaibanh.ID')->select('tbl_banh.ID','TenBanh','TenLoai','GiaTien','SoLuong','HinhAnh','NgaySX','NoiDung','KhuyenMai')->where('tbl_banh.ID', '=', $id)->first();
-		$soluongtoida=0;	
-		foreach(Cart::content() as $value)
-		{
-			if($value->id==$id)
-			{
-				$soluongtoida=$value->qty;
-			}
+		$soluongtoida = 0;
+
+foreach(Cart::getContent() as $value)
+{
+    if($value->id == $id)
+    {
+        $soluongtoida = $value->quantity;
+    }
+}
 		}
 		$Giatien=$Banh->GiaTien-$Banh->GiaTien*$Banh->KhuyenMai/100;
 		if($Banh->SoLuong>$soluongtoida)
