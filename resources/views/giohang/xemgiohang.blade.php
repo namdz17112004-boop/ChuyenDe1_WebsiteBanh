@@ -1,94 +1,129 @@
 @extends('layouts.app')
 
 @section('content')
-	<script type="text/javascript">
-		function capnhatsoluong(qty,rowId,id)
-		{
-			$.get(
-			'{{asset('giohang/capnhatso')}}',{qty:qty,rowId:rowId,id},
-			function()
-			{
-				location.reload();
-			}
-			);
-		}			
-	</script>
-	@if(Session::has('kiemtra')) 
-	<script type="text/javascript">
-		alert('Số lượng bạn mua vượt quá số lượng trong kho');
-	</script>
-	@endif
-	@if(Cart::getTotalQuantity()>0)	
-	<br></br>		
-	<h5>Giỏ hàng của bạn ({{Cart::getTotalQuantity()}} sản phẩm)<span style="float:right"><a href="{{ url('/') }}" style="color:#004f3d">Mua thêm sản phẩm khác</a></span></h5>
-	<br></br>
-	<div class="row justify-content-md-center">
-	<div class="col-md-10 text-center">
-	<form>
-	<div class="card">
-	
-	<table border="">
-	<thead>
-	<tr class="text-center">
-		<td width="40%"></td>
-		<td width=""><h5 class="">Giá tiền</h5> </td>
-		<td width=""><h5 class="text-primary">Số lượng</h5></td>
-		<td width=""><h5 class="text-danger">Tổng tiền</h5></td>
-		<td width=""></td>
-	</tr>
-	</thead>
-	<tbody>
-	@foreach($giohang as $value)
-	<tr class="border-bottom text-center">
-	
-		<td class=""><div class="row">
-		<img  class="border ml-4 mb-2 mt-2" src="{{ asset('images/'.$value->options->img) }}" style="height:100px; width:150px">
-		<h5 class="font-weight-bold ml-4 mt-2" style="text-transform: uppercase;">{{$value->name}} </h5></div>
-		</td>
-		<td class="align-middle">{{number_format($value->price)}} VNĐ</td>
-		 <td class="align-middle"><input type="number" value="{{$value->qty}}" style="width:70px" onchange="capnhatsoluong(this.value,'{{$value->rowId}}','{{$value->id}}')"> Cái</td>
-		<td class="align-middle">{{number_format($value->qty*$value->price)}} VNĐ</td>
-		<td class="align-middle"><a href="{{url('giohang/xoagiohang/'.$value->rowId)}}"><h4 class="icon-check-minus text-danger"></h4></a></td>
-	 </tr>
-	
-	 @endforeach
-	 <tr>
-		<td colspan="3"><h5 class="mt-3 mb-3">Tổng tiền</h5></td>
-		<td><h5>{{Cart::getTotal()}} VNĐ</h5></td>
-	 </tr>
-	 </tbody>
-	 </table>
-	</div>
-		<button type="button" class="mt-2"  style="color:#004f3d">
-		<a href="{{url('dathang/dienthongtin')}}">
-				Đặt hàng
-		</a>
-		</button>
-	</form>
-	
-	</div>
-	
-	</div>
-	
-	<div class="row mt-3 text-center">
-	<div class="col-md-12">
-		<button	 style="color:red; float:right" ><a href="{{ url('giohang/xoaallgiohang')}}">Xóa toàn bộ hàng</button>
-	</div>
-	</div>
-	<br></br>
-	@else
-		<br></br>
-		<div class="card text-center">
-		  <div class="card-header ">
-			<h1>Giỏ Hàng bạn trống</h1>
-		  </div>
-		  <div class="card-body">
-			<h2 class="icon-shopping-cart text-danger"></h2>
-			<a href="{{ url('/') }}" class="btn" style="color:#004f3d">Trở về trang chủ</a>
-		  </div>
-		</div>
-		<br></br>
-	@endif
-	
+
+<script>
+function capnhatsoluong(qty, id)
+{
+    $.get("{{ url('giohang/capnhatso') }}", {
+        qty: qty,
+        id: id
+    }, function () {
+        location.reload();
+    });
+}
+</script>
+
+@if(Session::has('kiemtra'))
+<script>
+alert('Số lượng vượt quá trong kho');
+</script>
+@endif
+
+@if(Cart::getTotalQuantity() > 0)
+
+<br>
+<h5>
+    Giỏ hàng của bạn ({{ Cart::getTotalQuantity() }} sản phẩm)
+    <span style="float:right">
+        <a href="{{ url('/') }}" style="color:#004f3d">Mua thêm</a>
+    </span>
+</h5>
+<br>
+
+<div class="row justify-content-md-center">
+<div class="col-md-10 text-center">
+
+<div class="card p-3">
+
+<table class="table table-bordered">
+<thead>
+<tr class="text-center">
+    <th width="40%"></th>
+    <th>Giá tiền</th>
+    <th class="text-primary">Số lượng</th>
+    <th class="text-danger">Tổng tiền</th>
+    <th></th>
+</tr>
+</thead>
+
+<tbody>
+@foreach($giohang as $value)
+<tr class="text-center align-middle">
+
+<td>
+    <div class="d-flex align-items-center">
+        <img src="{{ asset('images/'.$value->attributes->img) }}"
+             style="height:80px;width:120px"
+             class="border mr-3">
+
+        <h6 class="font-weight-bold text-uppercase">
+            {{ $value->name }}
+        </h6>
+    </div>
+</td>
+
+<td>{{ number_format($value->price) }} VNĐ</td>
+
+<td>
+    <input type="number"
+           value="{{ $value->quantity }}"
+           min="1"
+           style="width:70px"
+           onchange="capnhatsoluong(this.value, '{{ $value->id }}')">
+</td>
+
+<td>
+    {{ number_format($value->price * $value->quantity) }} VNĐ
+</td>
+
+<td>
+    <a href="{{ url('giohang/xoagiohang/'.$value->id) }}">
+        ❌
+    </a>
+</td>
+
+</tr>
+@endforeach
+
+<tr>
+    <td colspan="3"><b>Tổng tiền</b></td>
+    <td><b>{{ number_format(Cart::getTotal()) }} VNĐ</b></td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+<!-- Nút đặt hàng -->
+<a href="{{ url('dathang/dienthongtin') }}" class="btn btn-success mt-3">
+    Đặt hàng
+</a>
+
+</div>
+</div>
+
+<!-- Xóa tất cả -->
+<div class="text-right mt-3">
+    <a href="{{ url('giohang/xoaallgiohang') }}" class="btn btn-danger">
+        Xóa toàn bộ
+    </a>
+</div>
+
+<br>
+
+@else
+
+<br>
+<div class="card text-center p-4">
+    <h3>Giỏ hàng trống</h3>
+    <i class="fa fa-shopping-cart fa-3x text-danger"></i>
+    <br><br>
+    <a href="{{ url('/') }}" class="btn btn-primary">Về trang chủ</a>
+</div>
+<br>
+
+@endif
+
 @endsection
-	
