@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Cart;
-
+use Session
 class GioHangController extends Controller
 {
 public function themgiohang($id)
