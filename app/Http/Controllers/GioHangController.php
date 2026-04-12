@@ -8,42 +8,47 @@ use Cart;
 
 class GioHangController extends Controller
 {
-    public function themgiohang($id)
+public function themgiohang($id)
+{
+    // Kiểm tra đăng nhập
+    if(!Session::has('user'))
     {
-        $Banh = DB::table('tbl_banh')
-            ->join('tbl_loaibanh','tbl_banh.MaLoai','=','tbl_loaibanh.ID')
-            ->select('tbl_banh.ID','TenBanh','TenLoai','GiaTien','SoLuong','HinhAnh','KhuyenMai')
-            ->where('tbl_banh.ID', $id)
-            ->first();
-
-        $soluongtoida = 0;
-
-        // ✅ FIX: dùng getContent()
-        foreach(Cart::getContent() as $value)
-        {
-            if($value->id == $id)
-            {
-                $soluongtoida = $value->quantity; // ✅ đúng field
-            }
-        }
-
-        $Giatien = $Banh->GiaTien - ($Banh->GiaTien * $Banh->KhuyenMai / 100);
-
-        if($Banh->SoLuong > $soluongtoida)
-        {
-            Cart::add([
-                'id' => $id,
-                'name' => $Banh->TenBanh,
-                'quantity' => 1, // ✅ quantity
-                'price' => $Giatien,
-                'attributes' => [
-                    'img' => $Banh->HinhAnh
-                ]
-            ]);
-        }
-
-        return redirect()->back();
+        return redirect('/dangnhap')->with('thongbao', 'Vui lòng đăng nhập để đặt hàng!');
     }
+
+    $Banh = DB::table('tbl_banh')
+        ->join('tbl_loaibanh','tbl_banh.MaLoai','=','tbl_loaibanh.ID')
+        ->select('tbl_banh.ID','TenBanh','TenLoai','GiaTien','SoLuong','HinhAnh','KhuyenMai')
+        ->where('tbl_banh.ID', $id)
+        ->first();
+
+    $soluongtoida = 0;
+
+    foreach(Cart::getContent() as $value)
+    {
+        if($value->id == $id)
+        {
+            $soluongtoida = $value->quantity;
+        }
+    }
+
+    $Giatien = $Banh->GiaTien - ($Banh->GiaTien * $Banh->KhuyenMai / 100);
+
+    if($Banh->SoLuong > $soluongtoida)
+    {
+        Cart::add([
+            'id' => $id,
+            'name' => $Banh->TenBanh,
+            'quantity' => 1,
+            'price' => $Giatien,
+            'attributes' => [
+                'img' => $Banh->HinhAnh
+            ]
+        ]);
+    }
+
+    return redirect()->back();
+}
 
     public function xemgiohang()
     {
