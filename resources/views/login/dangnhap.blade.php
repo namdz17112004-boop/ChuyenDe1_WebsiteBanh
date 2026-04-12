@@ -229,7 +229,11 @@ font-family: 'Nunito', sans-serif;
         <div class="login-body">
             <form action="{{ url('/dangnhap/dienthongtin') }}" method="post">
                 {{ csrf_field() }}
-
+@if(session('thongbao'))
+<div class="error-box">
+    ⚠ {{ session('thongbao') }}
+</div>
+@endif
                 @if(isset($kt))
                 <div class="error-box">
                     ⚠ Tên tài khoản hoặc mật khẩu không đúng, vui lòng thử lại.
