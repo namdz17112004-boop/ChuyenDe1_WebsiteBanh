@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Cart;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class dathangController extends Controller
 {
@@ -36,22 +35,23 @@ class dathangController extends Controller
     {
         Session::pull('kiemtrahang','co');
 
-        $request->validate([
-            'hoten' => 'required',
-            'email' => 'required',
-            'sdt' => 'required',
-            'diachi'=>'required'
-        ]);
+$request->validate([
+    'hoten' => 'required',
+    'email' => 'required',
+    'sdt' => 'required',
+    'diachi' => 'required',
+    'thanhtoan' => 'required'
+]);
 
-        // ✅ FIX: getTotal()
-        DB::table('tbl_donhang')->insert([
-            'Email' => $request->email,
-            'TenKhachHang'=>$request->hoten,
-            'SDT'=>$request->sdt,
-            'DiaChi'=>$request->diachi,
-            'TongTien'=>Cart::getTotal(),
-            'NgayMua'=>Carbon::now()
-        ]);
+DB::table('tbl_donhang')->insert([
+    'Email' => $request->email,
+    'TenKhachHang' => $request->hoten,
+    'SDT' => $request->sdt,
+    'DiaChi' => $request->diachi,
+    'TongTien' => Cart::getTotal(),
+    'NgayMua' => Carbon::now(),
+    'ThanhToan' => $request->thanhtoan // 🔥 thêm dòng này
+]);
 
         $layid = DB::table('tbl_donhang')->max('ID');
 
@@ -109,7 +109,7 @@ class dathangController extends Controller
         if($donhang->Duyet == 0)
             DB::table('tbl_donhang')->where('ID',$id)->update(['Duyet'=>1]);
         else if($donhang->Duyet == 1)
-            DB::table('tbl_donhang')->where('ID',$id)->update(['Duyet'=>2]);
+DB::table('tbl_donhang')->where('ID',$id)->update(['Duyet'=>2]);
         else if($donhang->Duyet == 2)
         {
             DB::table('tbl_hoadon')->insert([
@@ -203,7 +203,7 @@ class dathangController extends Controller
         $chitiet = DB::table('tbl_chitetdonhang')
             ->join('tbl_banh','tbl_chitetdonhang.MaBanh','=','tbl_banh.ID')
             ->where('tbl_chitetdonhang.ID',$id)
-            ->select(DB::raw('tbl_chitetdonhang.SoLuong as SoLuong, TenBanh,HinhAnh,tbl_chitetdonhang.GiaTien as GiaTien'))
+->select(DB::raw('tbl_chitetdonhang.SoLuong as SoLuong, TenBanh,HinhAnh,tbl_chitetdonhang.GiaTien as GiaTien'))
             ->get();
 
         return view('hoadon.inhoadon',[
