@@ -34,7 +34,13 @@
 									<td>{{ $value->NgayMua }}</td>
 									<td>{{ $value->DiaChi }}</td>
 									<td>{{ number_format($value->TongTien) }}</td>
-									
+									<td>
+                                    @if($value->ThanhToan == 'cod')
+                                        <span class="badge bg-success">💵 COD</span>
+                                    @else
+                                        <span class="badge bg-primary">🏦 Chuyển khoản</span>
+                                    @endif
+                                    </td>
 									<td>
 										@if($value->Duyet==0)
 										
