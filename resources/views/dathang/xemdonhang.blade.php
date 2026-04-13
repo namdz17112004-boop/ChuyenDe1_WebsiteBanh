@@ -19,6 +19,7 @@
 								<td width="10%">Ngày Mua</td>
 								<td width="25%">Địa chỉ</td>
 								<td width="5%">Tổng Tiền</td>
+                                <td width="10%">Thanh toán</td>
 								<td width="5%">Duyệt</td>
 								<td width="5%">Xóa</td>
 								<td width="5%">Chi tiết</td>
