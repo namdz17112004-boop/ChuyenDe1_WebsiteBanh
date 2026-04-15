@@ -108,10 +108,10 @@ footer {
         <!-- Sidebar navigation -->
         <div id="slide-out" class="side-nav fixed">
           <ul class="custom-scrollbar">
-              <!-- Logo chính-->
+ <!-- Logo chính-->
 				<li>
                     <div class="logo-wrapper waves-light" style="width:auto; height:160px;">
-                        <a href="{{ url('/') }}" title="Đây Là Trang Chủ" ><img src="{{ asset('images/Untitled-1.gif') }}" class="img-fluid flex-center" ></a>
+                        <a href="{{ url('/') }}" title="Đây Là Trang Chủ" ><img src="{{ asset('images/eaut.png.png') }}" class="img-fluid flex-center" ></a>
 					</div>
 				</li>
              
