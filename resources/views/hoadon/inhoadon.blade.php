@@ -9,7 +9,7 @@
 <body onload="window.print();">
 <div id="page" class="page">
     <div class="header">
-        <div class="logo"><img style="height:100px; width:100px" src="{{ asset('images/Untitled-1.gif') }}"/></div>
+        <div class="logo"><img style="height:100px; width:100px" src="{{ asset('images/eaut.png.png') }}"/></div>
         <div class="company">Công Ty Bán Bánh 3 Thành Viên</div>
     </div>
   <br/>
