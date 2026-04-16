@@ -74,7 +74,7 @@
 </div>
    <!-- logo 
 	<div class="row mt-3 justify-content-md-center" style="height:50px; background:#00688B">
-		<img src="{{ asset('images/Untitled-1.gif') }}"width="50px" ></img>
+		<img src="{{ asset('images/eaut.png.png') }}"width="50px" ></img>
 	</div>
 	-->
 	
@@ -409,8 +409,8 @@
 			  <!-- Section heading -->
 			  <h2 class="h1-responsive font-weight-bold text-center my-5">Thông Tin Liên Hệ</h2>
 			  <!-- Section description -->
-			  <p class="text-center w-responsive mx-auto pb-5">Mọi chi tiết thắc mắc, xin vui lòng liên hệ về địa chỉ email: <i class="fa fa-envelope"></i> <a href="#">letrongky0110@gmail.com</a> 
-			  hoặc liên hệ trực tiếp SDT: <i class="fa fa-phone-square"></i>+84 35 228 3633</p>
+			  <p class="text-center w-responsive mx-auto pb-5">Mọi chi tiết thắc mắc, xin vui lòng liên hệ về địa chỉ email: <i class="fa fa-envelope"></i> <a href="#">donam17112004@gmail.com</a> 
+			  hoặc liên hệ trực tiếp SDT: <i class="fa fa-phone-square"></i>+84 967041245</p>
 
 			  <!-- Grid row -->
 			  <div class="row">
@@ -480,10 +480,15 @@
 				<div class="col-lg-7">
 
 				  <!--Google  map-->
-				  <div id="map-container-section" class="z-depth-1-half map-container-section mb-4" style="height: 400px">
-					  <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d981.145083556896!2d105.43248144750156!3d10.375401023326111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zY8OgIHBow6ogbmd1ecOqbiBoxrDGoW5nIGxvbmcgeHV5w6puIGFuIGdpYW5n!5e0!3m2!1svi!2s!4v1544546234287"
-					  frameborder="0" style="border:0" allowfullscreen></iframe>
-				  </div>
+				  <div class="card mt-3 p-2">
+    <h6>📍 Địa chỉ: Làng Nguyên Xá - Từ Liêm - Hà Nội</h6>
+    <iframe
+        src="https://www.google.com/maps?q=Làng+Nguyên+Xá,+Từ+Liêm,+Hà+Nội&output=embed"
+        width="100%"
+        height="400"
+        style="border:0; border-radius:10px;">
+    </iframe>
+</div>
 				  <!-- Buttons-->
 				  <div class="row text-center">
 					<div class="col-md-4">
@@ -642,13 +647,14 @@
   </div>{{-- END carousel-inner --}}
 
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="" aria-hidden="true"><h2 class="icon-chevron-sign-left" style="color:#00688B"></h2></span>
     <span class="sr-only">Previous</span>
   </a>
   <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="" aria-hidden="true"><h2 class="icon-chevron-sign-right" style="color:#00688B"></h2></span>
     <span class="sr-only">Next</span>
   </a>
+  
 
 </div>{{-- END carousel --}}
 <div class="row justify-content-md-center bg-white">
@@ -715,6 +721,9 @@
   position:relative;
   height:0;
 }
+.md-tabs{
+	margin-right: -1rem;
+}
 .map-container-section iframe {
   left:0;
   top:0;
@@ -722,7 +731,6 @@
   width:100%;
   position:absolute;
 }
-
 /* Fix carousel */
 #carouselExampleControls { position: relative; }
 .carousel-control-prev, .carousel-control-next {
@@ -733,6 +741,7 @@
     top: 50% !important;
     transform: translateY(-50%) !important;
     opacity: 1 !important;
+	margin-left: 250px;
 }
 .carousel-control-prev { left: 10px !important; }
 .carousel-control-next { right: 10px !important; }
@@ -768,6 +777,9 @@
 /* Fix promo images */
 .promo-box img { width: 100% !important; height: 170px !important; object-fit: cover; }
 .card-img-top { object-fit: cover; }
+.tab-content{
+	margin-right: -15px;
+}
 </style>
 
 @endsection
